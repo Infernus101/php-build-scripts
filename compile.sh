@@ -865,6 +865,7 @@ $HAVE_MYSQLI \
 --enable-cli \
 --enable-zip \
 --enable-ftp \
+--enable-fd-setsize=4096 \
 --enable-opcache=$HAVE_OPCACHE \
 --enable-igbinary \
 --enable-ds \
