@@ -5,14 +5,12 @@ jobs:
   steps:
   - bash: |
       sudo apt-get update
-      sudo apt-get install make autoconf automake libtool libtool-bin m4 wget libc-bin gzip bzip2 bison g++ git
+      sudo apt-get install make autoconf automake libtool libtool-bin m4 wget libc-bin gzip bzip2 bison g++ git re2c
     displayName: Install Dependencies
   - bash: |
       # Used "set -ex" instead of hashbang since script isn't executed with hashbang
       set -ex
-
       trap "exit 1" ERR
-
       echo $PWD
       ls
       chmod +x compile.sh
