@@ -1,10 +1,10 @@
 # Custom PHP build scripts for PocketMine-MP
 [![Build Status](https://dev.azure.com/pocketmine/PHP-Builds/_apis/build/status/pmmp.php-build-scripts)](https://dev.azure.com/pocketmine/PHP-Builds/_build?definitionId=3&_a=summary&view=branches)
-## Looking for prebuilt binaries? Head over to our [Jenkins build server](https://jenkins.pmmp.io/job/PHP-7.3-Aggregate)
+## Looking for prebuilt binaries? Head over to our [Jenkins build server](https://jenkins.pmmp.io/job/PHP-7.4-Aggregate)
 
 ## compile.sh
 
-Bash script used to compile PHP on MacOS and Linux platforms. Make sure you have ``make autoconf automake libtool m4 wget getconf gzip bzip2 bison g++ git cmake pkg-config``.
+Bash script used to compile PHP on MacOS and Linux platforms. Make sure you have ``make autoconf automake libtool m4 wget getconf gzip bzip2 bison g++ git cmake pkg-config re2c``.
 
 ### Additional notes
 #### Mac OSX (native compile)
@@ -23,10 +23,12 @@ Bash script used to compile PHP on MacOS and Linux platforms. Make sure you have
 | -f           | Enabling abusive optimizations...                                                     |
 | -g           | Will compile GD2                                                                      |
 | -j           | Set make threads to #                                                                 |
-| -l           | Will compile with LevelDB support (experimental with PHP7)                            |
+| -l           | Will compile with LevelDB support                                                     |
+| -n           | Don't remove sources after completing compilation                                     |
 | -s           | Will compile everything statically                                                    |
 | -t           | Set target                                                                            |
 | -u           | Will compile PocketMine-ChunkUtils C extension (recommended if using PC Anvil worlds) |
+| -v           | Enable Valgrind support in PHP                                                        |
 | -x           | Specifies we are doing cross-compile                                                  |
 
 ### Example:
@@ -55,6 +57,12 @@ Script to install PocketMine-MP and PHP binaries on Unix platforms.
 ## windows-compile-vs.bat
 
 Batch script utilizing Visual Studio on Windows to compile PHP binaries from sources.
-Ensure you have Visual Studio 2017, Windows 8.1 SDK, `git`, `7z` and `wget` installed in your PATH.
+Ensure you have Visual Studio 2017, `git`, `7z` and `wget` installed in your PATH.
 
-Prebuilt binaries can be downloaded from our [AppVeyor build job](https://ci.appveyor.com/project/pmmp/php-build-scripts/build/artifacts).
+This script doesn't accept parameters, but the following environment variables are influential:
+
+| Variable | Description |
+| -------- | ----------- |
+| `PHP_DEBUG_BUILD` | Disables optimisations and builds PHP with detailed debugging information (useful for debugging segfaults)
+| `SOURCES_PATH` | Where to put the downloaded sources for compilation |
+| `VS_EDITION` | Edition of Visual Studio installed, set to `Community` by default |
